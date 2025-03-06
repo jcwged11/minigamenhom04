@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bạn đã bị lừa Ahihi</title>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+<style>
+  body {
+    background: black;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 60px;
+    font-weight: bold;
+    animation: blink 0.2s infinite alternate;
+    position: relative;
+    z-index: 2;
+  }
+
+  @keyframes blink {
+    0% { text-shadow: 0 0 20px red; }
+    100% { text-shadow: 0 0 40px yellow; }
+  }
+
+  .firework {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, yellow, red, blue, green);
+    border-radius: 50%;
+    animation: explode 1.2s linear forwards;
+    opacity: 0.8;
+  }
+
+  @keyframes explode {
+    0% { transform: translate(0, 0) scale(0.2); opacity: 1; }
+    100% {
+      transform: translate(calc(-100px + 200px * var(--x)), calc(-100px + 200px * var(--y))) scale(2);
+      opacity: 0;
+    }
+  }
+
+  .sparkle {
+    width: 5px;
+    height: 5px;
+    background: white;
+    position: absolute;
+    animation: sparkle 0.8s infinite ease-in-out;
+    border-radius: 50%;
+  }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(2); }
+  }
+
+  .petal {
+    width: 10px;
+    height: 10px;
+    background: pink;
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall 5s linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
+
+  .face {
+    position: absolute;
+    font-size: 30px;
+    animation: fall 3s linear infinite;
+    opacity: 0.8;
+  }
+
+  .cat {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-image: url('https://media.tenor.com/_4YgA77ExHEAAAAi/cat-space.gif');
+    background-size: cover;
+    animation: fall 4s linear infinite;
+  }
+
+  video {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    opacity: 0.3;
+    z-index: -1;
+  }
+</style>
+</head>
+<body>
+<video autoplay loop muted>
+  <source src="Download%20(3).mp4" type="video/mp4">
+</video>
+<h1>BẠN ĐÃ BỊ LỪA AHIHI</h1>
+<audio autoplay loop>
+  <source src="SnapTik.Gdn_1741252394.mp3" type="audio/mp3">
+</audio>
+<script>
+  function createFirework() {
+    for (let i = 0; i < 50; i++) {
+      const firework = document.createElement('div');
+      firework.classList.add('firework');
+      firework.style.setProperty('--x', Math.random());
+      firework.style.setProperty('--y', Math.random());
+      firework.style.left = Math.random() * 100 + 'vw';
+      firework.style.top = Math.random() * 100 + 'vh';
+      document.body.appendChild(firework);
+      setTimeout(() => firework.remove(), 1200);
+    }
+  }
+
+  function createSparkle() {
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('sparkle');
+    sparkle.style.left = Math.random() * 100 + 'vw';
+    sparkle.style.top = Math.random() * 100 + 'vh';
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 800);
+  }
+
+  function createPetal() {
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+    petal.style.left = Math.random() * 100 + 'vw';
+    petal.style.top = '-10vh';
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), 5000);
+  }
+
+  function createFace() {
+    const face = document.createElement('div');
+    face.classList.add('face');
+    face.textContent = '🤪';
+    face.style.left = Math.random() * 100 + 'vw';
+    face.style.top = '-10vh';
+    document.body.appendChild(face);
+    setTimeout(() => face.remove(), 3000);
+  }
+
+  function createCat() {
+    const cat = document.createElement('div');
+    cat.classList.add('cat');
+    cat.style.left = Math.random() * 100 + 'vw';
+    cat.style.top = '-10vh';
+    document.body.appendChild(cat);
+    setTimeout(() => cat.remove(), 4000);
+  }
+
+  setInterval(createFirework, 300);
+  setInterval(createSparkle, 100);
+  setInterval(createPetal, 500);
+  setInterval(createFace, 300);
+  setInterval(createCat, 700);
+</script>
+
+<audio id="audio" autoplay loop>
+  <source src="SnapTik.Gdn_1741252394.mp3" type="audio/mp3">
+</audio>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('audio');
+    audio.muted = false;
+    audio.play().catch(() => {
+      document.body.addEventListener('click', () => {
+        audio.play();
+      }, { once: true });
+    });
+  });
+</script>
+
+</body>
+</html>
